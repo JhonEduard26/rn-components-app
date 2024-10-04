@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { globalStyles } from '../../../config/theme/theme'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Title } from '../../components/ui/title'
+import { MenuItem } from '../../components/ui/menu-item'
 
-export const menuItems = [
+const animationsItems = [
   // 01-animationMenuItems
   {
     name: 'Animation 101',
@@ -15,7 +16,9 @@ export const menuItems = [
     icon: 'albums-outline',
     component: 'Animation102Screen',
   },
+]
 
+export const menuItems = [
   // 02-menuItems
   {
     name: 'Pull to refresh',
@@ -47,7 +50,9 @@ export const menuItems = [
     icon: 'flask-outline',
     component: 'ChangeThemeScreen',
   },
+]
 
+const uiMenuItems = [
   // 03- uiMenuItems
   {
     name: 'Switches',
@@ -72,8 +77,35 @@ export const HomeScreen = () => {
       <View style={globalStyles.globalMargin}>
         <ScrollView>
           <Title text="Opciones del menú" safe />
-          {menuItems.map(item => (
-            <Text key={item.component}>{item.name}</Text>
+          {animationsItems.map((item, index) => (
+            <MenuItem
+              key={item.component}
+              {...item}
+              isFirst={index === 0}
+              isLast={index === animationsItems.length - 1}
+            />
+          ))}
+
+          <View style={{ marginTop: 20 }} />
+
+          {menuItems.map((item, index) => (
+            <MenuItem
+              key={item.component}
+              {...item}
+              isFirst={index === 0}
+              isLast={index === menuItems.length - 1}
+            />
+          ))}
+
+          <View style={{ marginTop: 20 }} />
+
+          {uiMenuItems.map((item, index) => (
+            <MenuItem
+              key={item.component}
+              {...item}
+              isFirst={index === 0}
+              isLast={index === uiMenuItems.length - 1}
+            />
           ))}
         </ScrollView>
       </View>
